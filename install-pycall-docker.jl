@@ -9,7 +9,5 @@ Pkg.build("PyCall")
 using PyCall
 
 np=pyimport("numpy")
-hp=pyimport("healpy")
 
-println(np.__version__)
-println(hp.__version__)
+println("Numpy version: $(np.__version__)")
