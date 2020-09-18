@@ -2,6 +2,9 @@ FROM julia:latest
 
 LABEL maintainer="Aurelio Amerio <aure.amerio[at]techytok.com>" 
 
+RUN useradd -ms /bin/bash amerio
+USER amerio
+
 WORKDIR /tmp
 # install miniconda3
 RUN curl -O https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
@@ -22,3 +25,5 @@ COPY install-pycall-docker.jl /tmp
 RUN julia install-pycall-docker.jl
 # clear tmp folder
 RUN rm -rf /tmp/*
+
+WORKDIR /home/amerio
