@@ -25,6 +25,10 @@ COPY install-pycall-docker.jl /tmp
 # install pycall
 RUN julia install-pycall-docker.jl
 # clear tmp folder
+
+USER root
 RUN rm -rf /tmp/*
+
+USER ${USERNAME}
 
 WORKDIR /home/${USERNAME}
