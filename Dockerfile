@@ -1,16 +1,17 @@
 FROM julia:latest
 
 LABEL maintainer="Aurelio Amerio <aure.amerio[at]techytok.com>" 
+ENV USERNAME amerio
 
-RUN useradd -ms /bin/bash amerio
-USER amerio
+RUN useradd -ms /bin/bash ${USERNAME}
+USER ${USERNAME}
 
 WORKDIR /tmp
 # install miniconda3
 RUN curl -O https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
-RUN bash Miniconda3-latest-Linux-x86_64.sh -b -p /software/miniconda3
-RUN /software/miniconda3/condabin/conda init
-ENV PATH /software/miniconda3/bin:$PATH
+RUN bash Miniconda3-latest-Linux-x86_64.sh -b -p /home/${USERNAME}/miniconda3
+RUN /home/${USERNAME}/miniconda3/bin/conda init
+ENV PATH /home/${USERNAME}/miniconda3/bin:$PATH
 
 # update conda and create julia environment
 RUN conda update -n base conda -y
@@ -26,4 +27,4 @@ RUN julia install-pycall-docker.jl
 # clear tmp folder
 RUN rm -rf /tmp/*
 
-WORKDIR /home/amerio
+WORKDIR /home/${USERNAME}
