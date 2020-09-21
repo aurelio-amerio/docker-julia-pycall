@@ -1,8 +1,8 @@
 FROM julia:latest
 
 LABEL maintainer="Aurelio Amerio <aure.amerio[at]techytok.com>" 
-ENV USERNAME nobody
-RUN userdel nobody 
+ENV USERNAME amerio
+# RUN userdel nobody 
 
 # add a user USERNAME with massword USERNAME
 RUN useradd -ms /bin/bash  -p $(echo ${USERNAME} | openssl passwd -1 -stdin) ${USERNAME}
