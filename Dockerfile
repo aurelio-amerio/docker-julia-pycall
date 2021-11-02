@@ -1,10 +1,10 @@
 FROM julia:latest
 
 LABEL maintainer="Aurelio Amerio <aure.amerio[at]techytok.com>" 
-ENV USERNAME amerio
+ENV USERNAME julian
 # RUN userdel nobody 
 
-# add a user USERNAME with massword USERNAME
+# add a user USERNAME with password USERNAME
 RUN useradd -ms /bin/bash  -p $(echo ${USERNAME} | openssl passwd -1 -stdin) ${USERNAME}
 USER ${USERNAME}
 
@@ -19,7 +19,7 @@ ENV PATH /home/${USERNAME}/miniconda3/bin:$PATH
 RUN conda update -n base conda -y
 RUN conda update -n base --all -y
 RUN conda install -c conda-forge tmux -y
-RUN conda create --name julia python=3.6
+RUN conda create --name julia python=3.9
 RUN conda install -n julia conda -y
 RUN conda update -n julia --all -y
 
